@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="//cdn.file.todest.cn/blog/user/logo.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="//cdn.file.todest.cn/blog/user/logo.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="//cdn.file.todest.cn/blog/user/logo.ico">
+  <link rel="mask-icon" href="//cdn.file.todest.cn/blog/user/logo.ico" color="#222">
+  <meta name="msapplication-config" content="//cdn.file.todest.cn/blog/user/logo.ico">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.todest.cn","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用帮助GNU Wget 1.11.4，非交互式的网络文件下载工具。用法： wget [选项]… [URL]…Mandatory arguments to long options are mandatory for short options too. Wget for Windows官网：http:&#x2F;&#x2F;gnuwin32.sourceforge.net&#x2F;packages&#x2F;wget.htm下载地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wget命令解释">
+<meta property="og:url" content="https://blog.todest.cn/post/2640927a/index.html">
+<meta property="og:site_name" content="亦往沧劫">
+<meta property="og:description" content="使用帮助GNU Wget 1.11.4，非交互式的网络文件下载工具。用法： wget [选项]… [URL]…Mandatory arguments to long options are mandatory for short options too. Wget for Windows官网：http:&#x2F;&#x2F;gnuwin32.sourceforge.net&#x2F;packages&#x2F;wget.htm下载地址">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-29T09:11:09.000Z">
+<meta property="article:modified_time" content="2020-05-11T09:42:24.799Z">
+<meta property="article:author" content="亦往沧劫">
+<meta property="article:tag" content="Wget">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.todest.cn/post/2640927a/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Wget命令解释 | 亦往沧劫</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="亦往沧劫" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">亦往沧劫</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description"><p id="hitokoto">Loading...</p></p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">53</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">58</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">20</span></a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/photo/" rel="section"><i class="fa fa-fw fa-photo"></i>相册</a>
+
+  </li>
+        <li class="menu-item menu-item-链接">
+
+    <a href="/links/" rel="section"><i class="fa fa-fw fa-link"></i>链接</a>
+
+  </li>
+        <li class="menu-item menu-item-留言">
+
+    <a href="/bbs/" rel="section"><i class="fa fa-fw fa-comments"></i>留言</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/yourname" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.todest.cn/post/2640927a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s.gravatar.com/avatar/4756cb352ec7f58884fdc0c219ea00dc?s=80">
+      <meta itemprop="name" content="亦往沧劫">
+      <meta itemprop="description" content="我不知道你在这儿<br/>知道的话我会常来看你的">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="亦往沧劫">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Wget命令解释
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-29 17:11:09" itemprop="dateCreated datePublished" datetime="2019-03-29T17:11:09+08:00">2019-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-11 17:42:24" itemprop="dateModified" datetime="2020-05-11T17:42:24+08:00">2020-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/post/2640927a/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/post/2640927a/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="使用帮助"><a href="#使用帮助" class="headerlink" title="使用帮助"></a>使用帮助</h1><p>GNU Wget 1.11.4，非交互式的网络文件下载工具。<br>用法： wget [选项]… [URL]…<br>Mandatory arguments to long options are mandatory for short options too.</p>
+<h2 id="Wget-for-Windows"><a href="#Wget-for-Windows" class="headerlink" title="Wget for Windows"></a>Wget for Windows</h2><p>官网：<a target="_blank" rel="noopener" href="http://gnuwin32.sourceforge.net/packages/wget.htm">http://gnuwin32.sourceforge.net/packages/wget.htm</a><br>下载地址：<a target="_blank" rel="noopener" href="http://downloads.sourceforge.net/gnuwin32/wget-1.11.4-1-setup.exe">http://downloads.sourceforge.net/gnuwin32/wget-1.11.4-1-setup.exe</a><br><a id="more"></a></p>
+<h2 id="Wget-—-—help"><a href="#Wget-—-—help" class="headerlink" title="Wget — —help"></a>Wget — —help</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">Startup:</span><br><span class="line">  -V,  --version           display the version of Wget <span class="keyword">and</span> exit.</span><br><span class="line">  -h,  --help              print this help.</span><br><span class="line">  -b,  --background        go to background after startup.</span><br><span class="line">  -e,  --execute=<span class="keyword">COMMAND</span>   execute a `.wgetrc&#x27;-style <span class="keyword">command</span>.</span><br><span class="line"></span><br><span class="line">Logging <span class="keyword">and</span> input <span class="keyword">file</span>:</span><br><span class="line">  -o,  --output-<span class="keyword">file</span>=<span class="keyword">FILE</span>    log messages to <span class="keyword">FILE</span>.</span><br><span class="line">  -a,  --append-output=<span class="keyword">FILE</span>  append messages to <span class="keyword">FILE</span>.</span><br><span class="line">  -d,  --debug               print lots of debugging information.</span><br><span class="line">  -q,  --quiet               quiet (no output).</span><br><span class="line">  -v,  --verbose             be verbose (this is the default).</span><br><span class="line">  -nv, --no-verbose          turn <span class="keyword">off</span> verboseness, without being quiet.</span><br><span class="line">  -i,  --input-<span class="keyword">file</span>=<span class="keyword">FILE</span>     download URLs found in <span class="keyword">FILE</span>.</span><br><span class="line">  -F,  --force-html          treat input <span class="keyword">file</span> as HTML.</span><br><span class="line">  -B,  --base=URL            prepends URL to relative links in -F -i <span class="keyword">file</span>.</span><br><span class="line"></span><br><span class="line">Download:</span><br><span class="line">  -t,  --tries=NUMBER            <span class="keyword">set</span> number of retries to NUMBER (<span class="number">0</span> unlimits).</span><br><span class="line">       --retry-connrefused       retry even <span class="keyword">if</span> connection is refused.</span><br><span class="line">  -O,  --output-document=<span class="keyword">FILE</span>    write documents to <span class="keyword">FILE</span>.</span><br><span class="line">  -nc, --no-clobber              skip downloads that would download to</span><br><span class="line">                                 existing files.</span><br><span class="line">  -c,  --<span class="keyword">continue</span>                resume getting a partially-downloaded <span class="keyword">file</span>.</span><br><span class="line">       --progress=TYPE           select progress gauge type.</span><br><span class="line">  -N,  --timestamping            don&#x27;t re-retrieve files unless newer than</span><br><span class="line">                                 local.</span><br><span class="line">  -S,  --server-response         print server response.</span><br><span class="line">       --spider                  don&#x27;t download anything.</span><br><span class="line">  -T,  --timeout=SECONDS         <span class="keyword">set</span> all timeout values to SECONDS.</span><br><span class="line">       --dns-timeout=SECS        <span class="keyword">set</span> the DNS lookup timeout to SECS.</span><br><span class="line">       --connect-timeout=SECS    <span class="keyword">set</span> the connect timeout to SECS.</span><br><span class="line">       --read-timeout=SECS       <span class="keyword">set</span> the read timeout to SECS.</span><br><span class="line">  -w,  --wait=SECONDS            wait SECONDS between retrievals.</span><br><span class="line">       --waitretry=SECONDS       wait <span class="number">1</span>..SECONDS between retries of a retrieval.</span><br><span class="line">       --random-wait             wait from <span class="number">0</span>...<span class="number">2</span>*WAIT secs between retrievals.</span><br><span class="line">       --no-proxy                explicitly turn <span class="keyword">off</span> proxy.</span><br><span class="line">  -Q,  --quota=NUMBER            <span class="keyword">set</span> retrieval quota to NUMBER.</span><br><span class="line">       --bind-address=ADDRESS    bind to ADDRESS (hostname <span class="keyword">or</span> IP) <span class="keyword">on</span> local host.</span><br><span class="line">       --limit-rate=RATE         limit download rate to RATE.</span><br><span class="line">       --no-dns-cache            disable caching DNS lookups.</span><br><span class="line">       --restrict-<span class="keyword">file</span>-names=OS  restrict chars in <span class="keyword">file</span> names to ones OS allows.</span><br><span class="line">       --ignore-case             ignore case when matching files/directories.</span><br><span class="line">  -<span class="number">4</span>,  --inet4-only              connect only to IPv4 addresses.</span><br><span class="line">  -<span class="number">6</span>,  --inet6-only              connect only to IPv6 addresses.</span><br><span class="line">       --prefer-family=FAMILY    connect first to addresses of specified family,</span><br><span class="line">                                 one of IPv6, IPv4, <span class="keyword">or</span> none.</span><br><span class="line">       --user=USER               <span class="keyword">set</span> both ftp <span class="keyword">and</span> http user to USER.</span><br><span class="line">       --password=PASS           <span class="keyword">set</span> both ftp <span class="keyword">and</span> http password to PASS.</span><br><span class="line"></span><br><span class="line">Directories:</span><br><span class="line">  -nd, --no-directories           don&#x27;t create directories.</span><br><span class="line">  -x,  --force-directories        force creation of directories.</span><br><span class="line">  -nH, --no-host-directories      don&#x27;t create host directories.</span><br><span class="line">       --protocol-directories     use protocol name in directories.</span><br><span class="line">  -P,  --directory-prefix=PREFIX  save files to PREFIX/...</span><br><span class="line">       --cut-dirs=NUMBER          ignore NUMBER remote directory components.</span><br><span class="line"></span><br><span class="line">HTTP options:</span><br><span class="line">       --http-user=USER        <span class="keyword">set</span> http user to USER.</span><br><span class="line">       --http-password=PASS    <span class="keyword">set</span> http password to PASS.</span><br><span class="line">       --no-cache              disallow server-cached data.</span><br><span class="line">  -E,  --html-extension        save HTML documents with `.html&#x27; extension.</span><br><span class="line">       --ignore-length         ignore `Content-Length&#x27; header field.</span><br><span class="line">       --header=<span class="keyword">STRING</span>         insert <span class="keyword">STRING</span> among the headers.</span><br><span class="line">       --max-redirect          maximum redirections allowed per page.</span><br><span class="line">       --proxy-user=USER       <span class="keyword">set</span> USER as proxy username.</span><br><span class="line">       --proxy-password=PASS   <span class="keyword">set</span> PASS as proxy password.</span><br><span class="line">       --referer=URL           <span class="keyword">include</span> `Referer: URL&#x27; header in HTTP request.</span><br><span class="line">       --save-headers          save the HTTP headers to <span class="keyword">file</span>.</span><br><span class="line">  -U,  --user-agent=AGENT      identify as AGENT instead of Wget/VERSION.</span><br><span class="line">       --no-http-keep-alive    disable HTTP keep-alive (persistent connections).</span><br><span class="line">       --no-cookies            don&#x27;t use cookies.</span><br><span class="line">       --load-cookies=<span class="keyword">FILE</span>     load cookies from <span class="keyword">FILE</span> before session.</span><br><span class="line">       --save-cookies=<span class="keyword">FILE</span>     save cookies to <span class="keyword">FILE</span> after session.</span><br><span class="line">       --keep-session-cookies  load <span class="keyword">and</span> save session (non-permanent) cookies.</span><br><span class="line">       --post-data=<span class="keyword">STRING</span>      use the POST method; send <span class="keyword">STRING</span> as the data.</span><br><span class="line">       --post-<span class="keyword">file</span>=<span class="keyword">FILE</span>        use the POST method; send contents of <span class="keyword">FILE</span>.</span><br><span class="line">       --content-disposition   honor the Content-Disposition header when</span><br><span class="line">                               choosing local <span class="keyword">file</span> names (EXPERIMENTAL).</span><br><span class="line">       --auth-no-challenge     Send Basic HTTP authentication information</span><br><span class="line">                               without first waiting for the server&#x27;s</span><br><span class="line">                               challenge.</span><br><span class="line"></span><br><span class="line">HTTPS (SSL/TLS) options:</span><br><span class="line">       --secure-protocol=PR     choose secure protocol, one of auto, SSLv2,</span><br><span class="line">                                SSLv3, <span class="keyword">and</span> TLSv1.</span><br><span class="line">       --no-check-certificate   don&#x27;t validate the server&#x27;s certificate.</span><br><span class="line">       --certificate=<span class="keyword">FILE</span>       client certificate <span class="keyword">file</span>.</span><br><span class="line">       --certificate-type=TYPE  client certificate type, PEM <span class="keyword">or</span> DER.</span><br><span class="line">       --private-key=<span class="keyword">FILE</span>       private key <span class="keyword">file</span>.</span><br><span class="line">       --private-key-type=TYPE  private key type, PEM <span class="keyword">or</span> DER.</span><br><span class="line">       --ca-certificate=<span class="keyword">FILE</span>    <span class="keyword">file</span> with the bundle of CA&#x27;s.</span><br><span class="line">       --ca-directory=DIR       directory where hash <span class="keyword">list</span> of CA&#x27;s is stored.</span><br><span class="line">       --random-<span class="keyword">file</span>=<span class="keyword">FILE</span>       <span class="keyword">file</span> with random data for seeding the SSL PRNG.</span><br><span class="line">       --egd-<span class="keyword">file</span>=<span class="keyword">FILE</span>          <span class="keyword">file</span> naming the EGD socket with random data.</span><br><span class="line"></span><br><span class="line">FTP options:</span><br><span class="line">       --ftp-user=USER         <span class="keyword">set</span> ftp user to USER.</span><br><span class="line">       --ftp-password=PASS     <span class="keyword">set</span> ftp password to PASS.</span><br><span class="line">       --no-<span class="keyword">remove</span>-listing     don&#x27;t <span class="keyword">remove</span> `.listing&#x27; files.</span><br><span class="line">       --no-glob               turn <span class="keyword">off</span> FTP <span class="keyword">file</span> name globbing.</span><br><span class="line">       --no-passive-ftp        disable the <span class="string">&quot;passive&quot;</span> transfer mode.</span><br><span class="line">       --retr-symlinks         when recursing, get linked-to files (<span class="keyword">not</span> dir).</span><br><span class="line">       --preserve-permissions  preserve remote <span class="keyword">file</span> permissions.</span><br><span class="line"></span><br><span class="line">Recursive download:</span><br><span class="line">  -r,  --recursive          specify recursive download.</span><br><span class="line">  -l,  --level=NUMBER       maximum recursion depth (inf <span class="keyword">or</span> <span class="number">0</span> for infinite).</span><br><span class="line">       --delete-after       delete files locally after downloading them.</span><br><span class="line">  -k,  --convert-links      make links in downloaded HTML point to local files.</span><br><span class="line">  -K,  --backup-converted   before converting <span class="keyword">file</span> X, back up as X.orig.</span><br><span class="line">  -m,  --mirror             shortcut for -N -r -l inf --no-<span class="keyword">remove</span>-listing.</span><br><span class="line">  -p,  --page-requisites    get all images, etc. needed to display HTML page.</span><br><span class="line">       --strict-comments    turn <span class="keyword">on</span> strict (SGML) handling of HTML comments.</span><br><span class="line"></span><br><span class="line">Recursive accept/reject:</span><br><span class="line">  -A,  --accept=<span class="keyword">LIST</span>               comma-separated <span class="keyword">list</span> of accepted extensions.</span><br><span class="line">  -R,  --reject=<span class="keyword">LIST</span>               comma-separated <span class="keyword">list</span> of rejected extensions.</span><br><span class="line">  -D,  --domains=<span class="keyword">LIST</span>              comma-separated <span class="keyword">list</span> of accepted domains.</span><br><span class="line">       --exclude-domains=<span class="keyword">LIST</span>      comma-separated <span class="keyword">list</span> of rejected domains.</span><br><span class="line">       --follow-ftp                follow FTP links from HTML documents.</span><br><span class="line">       --follow-tags=<span class="keyword">LIST</span>          comma-separated <span class="keyword">list</span> of followed HTML tags.</span><br><span class="line">       --ignore-tags=<span class="keyword">LIST</span>          comma-separated <span class="keyword">list</span> of ignored HTML tags.</span><br><span class="line">  -H,  --span-hosts                go to foreign hosts when recursive.</span><br><span class="line">  -L,  --relative                  follow relative links only.</span><br><span class="line">  -I,  --<span class="keyword">include</span>-directories=<span class="keyword">LIST</span>  <span class="keyword">list</span> of allowed directories.</span><br><span class="line">  -X,  --exclude-directories=<span class="keyword">LIST</span>  <span class="keyword">list</span> of excluded directories.</span><br><span class="line">  -np, --no-parent                 don&#x27;t ascend to the parent directory.</span><br></pre></td></tr></table></figure>
+<h2 id="常用Wget指令"><a href="#常用Wget指令" class="headerlink" title="常用Wget指令"></a>常用Wget指令</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://xxx.cn					//下载网页源代码</span><br><span class="line">wget -r http://xxx.cn					//递归下载网站源代码</span><br><span class="line">wget -r --no-cookie --no-check-certificate		//忽略SSL证书验证</span><br><span class="line">wget -c -r -p -k http://xxx.cn				//断点续传，整站下载</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>赏点呗！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="//cdn.file.todest.cn/blog/user/wechatpay.jpg" alt="亦往沧劫 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="//cdn.file.todest.cn/blog/user/alipay.jpg" alt="亦往沧劫 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="//cdn.file.todest.cn/blog/user/bitcoin.png" alt="亦往沧劫 比特币">
+        <p>比特币</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Wget/" rel="tag"># Wget</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/2cf738e6/" rel="prev" title="中国剩余定理">
+      <i class="fa fa-chevron-left"></i> 中国剩余定理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/52089862/" rel="next" title="各种排序时间复杂度比较">
+      各种排序时间复杂度比较 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B8%AE%E5%8A%A9"><span class="nav-number">1.</span> <span class="nav-text">使用帮助</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wget-for-Windows"><span class="nav-number">1.1.</span> <span class="nav-text">Wget for Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wget-%E2%80%94-%E2%80%94help"><span class="nav-number">1.2.</span> <span class="nav-text">Wget — —help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8Wget%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">常用Wget指令</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="亦往沧劫"
+      src="https://s.gravatar.com/avatar/4756cb352ec7f58884fdc0c219ea00dc?s=80">
+  <p class="site-author-name" itemprop="name">亦往沧劫</p>
+  <div class="site-description" itemprop="description">我不知道你在这儿<br/>知道的话我会常来看你的</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/todest" title="GitHub → https://github.com/todest" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:todest@qq.com" title="E-Mail → mailto:todest@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=1123792492" title="QQ → http://wpa.qq.com/msgrd?v=3&uin=1123792492" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/ultrasurreal" title="Facebook → https://www.facebook.com/ultrasurreal" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/11422695" title="StackOverflow → https://stackoverflow.com/users/11422695" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.instagram.com/yonghangguo/" title="Instagram → https://www.instagram.com/yonghangguo/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i></a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://boiltask.com" title="https://boiltask.com" rel="noopener" target="_blank">BoilTask</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/codancer" title="https://www.cnblogs.com/codancer" rel="noopener" target="_blank">Codancer</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://colsrch.cn" title="https://colsrch.cn" rel="noopener" target="_blank">Colsrch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.wzy1999.wang" title="https://blog.wzy1999.wang" rel="noopener" target="_blank">执念</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://anyway521.github.io" title="https://anyway521.github.io" rel="noopener" target="_blank">Des_tiny</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://cndrew.cn" title="https://cndrew.cn" rel="noopener" target="_blank">Drew</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://rookie6.github.io" title="https://rookie6.github.io" rel="noopener" target="_blank">rookie6</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.lzphi.cn" title="https://www.lzphi.cn" rel="noopener" target="_blank">LuoZui</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://angelni.github.io" title="https://angelni.github.io" rel="noopener" target="_blank">Sky</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blogzhy.cn" title="https://blogzhy.cn" rel="noopener" target="_blank">一Wa哇一天</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jinqimu.xyz" title="https://jinqimu.xyz" rel="noopener" target="_blank">Jinqimu</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://fuzhiyuan.github.io" title="https://fuzhiyuan.github.io" rel="noopener" target="_blank">FuZhiyuan</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://pipakacha.com" title="https://pipakacha.com" rel="noopener" target="_blank">RuiRui</a>
+        </li>
+    </ul>
+  </div>
+<script src="//v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+<style>
+@media all and (orientation : portrait) {
+	#hitokoto{
+		padding-left: 50px;
+		padding-right: 50px;
+	}
+}
+</style>
+
+
+
+
+
+<script type="text/javascript" src="//cdn.file.todest.cn/blog/js/clicklove.js"></script>
+
+
+
+
+
+<script type="text/javascript" src="//cdn.file.todest.cn/blog/js/crash_cheat.js"></script>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">亦往沧劫</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">139k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:06</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'NNOFYEbCjmMJUqInK2zEpetd-gzGzoHsz',
+      appKey     : 'Q474k3XvUzlPbRG5bOyNCxVt',
+      placeholder: "写点什么？",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
