@@ -1,0 +1,128 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 亦往沧劫
+subtitle: <p id="hitokoto">Loading...</p>
+description: 我不知道你在这儿<br/>知道的话我会常来看你的
+keywords:
+author: 亦往沧劫
+language:
+- zh-CN
+- en
+timezone: Asia/Shanghai
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://blog.todest.cn
+root: /
+permalink: post/:abbrlink/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render: 
+- diy/**
+- README.md
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Applies to the whole site or post only
+  exclude: [] # Exclude hostname. Specify subdomain when applicable, including www
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false #设为false
+  tab_replace:
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 5 #posts
+  order_by: -date
+  
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 100 #archives
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+
+theme: next
+
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+live2d:
+  enable: false
+  scriptFrom: https://cdn.file.todest.cn/blog/js/L2Dwidget.min.js
+  model:
+    use: live2d-widget-model-wanko
+  display:
+    position: right
+    width: 240
+    height: 240
+  mobile:
+    show: false
+
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+abbrlink:
+  alg: crc32
+  rep: hex
+encrypt:
+    enable: true
+    abstract: 这是一篇加密文章
+    message: 请输入密码
+deploy:
+  type: git
+  repository: 
+    github: git@github.com:todest/todest.github.io.git
+    coding: git@e.coding.net:todest/todest.git
+  branch: master
+backup:
+  type: git
+  theme: next
+  message: Backup Blog
+  repository:
+    github: git@github.com:todest/todest.github.io.git,backup
+    coding: git@e.coding.net:todest/todest.git,backup
